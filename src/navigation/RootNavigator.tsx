@@ -4,6 +4,7 @@ import React, {useEffect} from 'react';
 import NAVIGATION from './NavConts';
 import Home from '../screens/home/Home';
 import SplashScreen from '../screens/SplashScreen';
+import Flights from '../screens/home/Flights';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ const RootNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name={NAVIGATION.HOME} component={Home} />
+        <Stack.Screen name={NAVIGATION.FLIGHTS} component={Flights} />
       </Stack.Navigator>
     </NavigationContainer>
   );

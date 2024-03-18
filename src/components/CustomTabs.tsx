@@ -1,6 +1,12 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {LayoutAnimation, StyleSheet, Text, View, ViewStyle} from 'react-native';
+import {
+  LayoutAnimation,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {COLORS, FONT_SIZES} from '../utils/styles';
 
 type Props = {
@@ -26,20 +32,20 @@ export const CustomTabs = ({
   return (
     <View style={[styles.tabs, tabStyle]}>
       {tabs.map((tab, index) => (
-        <View
+        <TouchableOpacity
+          key={index}
           style={{
             alignItems: 'center',
             width: `${100 / tabs.length}%`,
             gap: 6,
-          }}>
+          }}
+          onPress={() => onPress(index)}>
           <Text
-            key={index}
             style={[
               styles.tabText,
               tabTextStyle,
               {opacity: index === activeTabIndex ? 1 : 0.5},
-            ]}
-            onPress={() => onPress(index)}>
+            ]}>
             {tab}
           </Text>
           {activeTabIndex === index && (
@@ -48,11 +54,11 @@ export const CustomTabs = ({
                 height: 3,
                 borderRadius: 10,
                 width: '20%',
-                backgroundColor: COLORS.ORANGE,
+                backgroundColor: COLORS.BLUE,
               }}
             />
           )}
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );

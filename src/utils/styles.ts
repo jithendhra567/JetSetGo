@@ -3,12 +3,18 @@ import {fontNormalize} from './common';
 export const COLORS = {
   TRANSPARENT: '#00000000',
 
+  PRIMARY: '#000000',
+
   TEXT: '#000',
   WHITE: '#FFF',
 
   BLACK: '#000',
+  BLACK_OPAC_50: '#00000089',
+  BLACK_OPAC_90: '#00000039',
 
   GREY: '#E8E8E8',
+  BORDER_COLOR: '#DEDEDE',
+  GREY_DARK: '#7D7D7D',
 
   ORANGE: '#FF5420',
 

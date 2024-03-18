@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import ENDPOINTS from '../../utils/apiEndPoints';
 
-type FlightType = {
+export type FlightType = {
   id: number;
   gate: string;
   price: number;
@@ -20,7 +20,7 @@ const homeApi = createApi({
   reducerPath: 'homeApi',
   baseQuery: fetchBaseQuery({baseUrl: ENDPOINTS.baseUrl}),
   endpoints: builder => ({
-    getFlights: builder.query<FlightType, void>({
+    getFlights: builder.query<FlightType[], void>({
       query: () => ({
         url: ENDPOINTS.getFlights,
       }),
