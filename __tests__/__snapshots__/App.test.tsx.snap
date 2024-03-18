@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom tabs renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "gap": 6,
+        "opacity": 1,
+        "width": "50%",
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#000",
+            "fontSize": 53,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          },
+          undefined,
+          {
+            "opacity": 1,
+          },
+        ]
+      }
+    >
+      test
+    </Text>
+    <View
+      style={
+        {
+          "backgroundColor": "#1E59F9",
+          "borderRadius": 10,
+          "height": 3,
+          "width": "20%",
+        }
+      }
+    />
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "gap": 6,
+        "opacity": 1,
+        "width": "50%",
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#000",
+            "fontSize": 53,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          },
+          undefined,
+          {
+            "opacity": 0.5,
+          },
+        ]
+      }
+    >
+      test2
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`primay button renders correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "backgroundColor": "#1E59F9",
+      "borderRadius": 10,
+      "elevation": 6,
+      "opacity": 1,
+      "paddingVertical": 14,
+      "shadowColor": "#000000",
+      "shadowOffset": {
+        "height": 4,
+        "width": 0,
+      },
+      "shadowOpacity": 0.19,
+      "shadowRadius": 5.62,
+    }
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#FFF",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        },
+        undefined,
+      ]
+    }
+  >
+    test
+  </Text>
+</View>
+`;
