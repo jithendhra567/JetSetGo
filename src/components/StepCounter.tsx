@@ -47,7 +47,9 @@ const styles = StyleSheet.create({
   },
   actionContainer: {
     borderRadius: 100,
-    backgroundColor: COLORS.BLACK,
+    backgroundColor: COLORS.WHITE,
+    borderWidth: 1,
+    borderColor: COLORS.BORDER_COLOR,
     position: 'relative',
     padding: 16,
     justifyContent: 'center',
@@ -56,11 +58,12 @@ const styles = StyleSheet.create({
   action: {
     fontSize: FONT_SIZES['4xl'],
     position: 'absolute',
-    color: COLORS.WHITE,
+    color: COLORS.BLACK,
   },
   steps: {
     fontSize: FONT_SIZES['4xl'],
     color: COLORS.BLACK,
+    fontWeight: 'bold',
   },
 });
 

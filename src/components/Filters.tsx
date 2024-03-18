@@ -168,6 +168,14 @@ const Filters = ({filter, airlines = [], onApply, onDismiss}: Props) => {
             </TouchableOpacity>
           );
         })}
+        {airlines.length === 0 && (
+          <View
+            style={{flex: 0.8, justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={{fontSize: FONT_SIZES['4xl'], fontWeight: 'bold'}}>
+              No Airline Found
+            </Text>
+          </View>
+        )}
       </View>
     );
   };

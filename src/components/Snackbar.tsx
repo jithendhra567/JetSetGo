@@ -116,11 +116,11 @@ const styles = StyleSheet.create({
   text: {
     width: '86%',
     color: COLORS.WHITE,
-    fontSize: FONT_SIZES.md,
+    fontSize: FONT_SIZES.lg,
   },
   close: {
     color: COLORS.WHITE,
-    fontSize: FONT_SIZES.sm,
+    fontSize: FONT_SIZES.md,
   },
 });
 

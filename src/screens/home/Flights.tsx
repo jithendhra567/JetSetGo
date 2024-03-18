@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {
   FlatList,
@@ -8,22 +9,35 @@ import {
   View,
 } from 'react-native';
 import {COLORS, FONT_SIZES} from '../../utils/styles';
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {FlightType, useGetFlightsQuery} from './home-api';
 import ASSETS from '../../utils/assets';
 import FlightItem from './FlightItem';
-import {WIDTH, sortFlights} from '../../utils/common';
+import {HEIGHT, WIDTH, sortFlights} from '../../utils/common';
 import CustomModal from '../../components/CustomModal';
 import Filters, {AirlineType, FiltersType} from '../../components/Filters';
+import dayjs from 'dayjs';
+import FlightRequest, {FlightRequestType} from './FlightRequest';
 
 type Props = {
   navigation: NavigationProp<any>;
+  route: RouteProp<any, any>;
 };
 
-const Flights = ({navigation}: Props) => {
+const Flights = ({navigation, route}: Props) => {
   const {data, isLoading} = useGetFlightsQuery();
-  const [showFilter, setShowFilter] = useState(false);
 
+  const params = route.params as any;
+  const flightRequest: FlightRequestType = {
+    ...params,
+    flightDate: {
+      departure: dayjs(params.flightDate.departure),
+      return: dayjs(params.flightDate.return),
+    },
+  };
+  const [flightConfig, setFlightConfig] =
+    useState<FlightRequestType>(flightRequest);
+  const [showFilter, setShowFilter] = useState(false);
   const [airlines, setAirline] = useState<AirlineType[]>([]);
   const [flights, setFlights] = useState<FlightType[]>([]);
   const [filters, setFilter] = useState<FiltersType>({
@@ -37,8 +51,12 @@ const Flights = ({navigation}: Props) => {
 
   useEffect(() => {
     if (data) {
+      console.log('Filtering');
+      const filtered = data.filter(item => {
+        return isValidFlihght(item);
+      });
       const map = new Map();
-      data.forEach(item => {
+      filtered.forEach(item => {
         if (map.has(item.airline)) {
           map.set(item.airline, map.get(item.airline) + 1);
         } else {
@@ -50,25 +68,59 @@ const Flights = ({navigation}: Props) => {
         length: value,
       }));
       setAirline(values);
-      setFlights(data);
+      setFlights(filtered);
     }
-  }, [data]);
+  }, [data, flightConfig]);
+
+  const isValidFlihght = (flight: FlightType) => {
+    const validFlightAccordingToPassengers =
+      flight.seatsAvailable >= flightConfig.passengers;
+    const validFlightAccordingToConfig =
+      flightConfig.flightRoute.from === flight.origin &&
+      flightConfig.flightRoute.to === flight.destination;
+
+    const flightDeaptureDate = new Date(flight.departureTime).getTime();
+    const userDate = new Date(
+      flightConfig.flightDate.departure.toISOString(),
+    ).getTime();
+    const validFlightAccordingToDate = flightDeaptureDate >= userDate;
+    return (
+      validFlightAccordingToConfig &&
+      validFlightAccordingToPassengers &&
+      validFlightAccordingToDate
+    );
+  };
 
   const onBack = () => {
     navigation.goBack();
   };
 
-  const onApply = (config: FiltersType) => {
-    setFilter(config);
+  const onApply = (filterConfig: FiltersType) => {
+    setFilter(filterConfig);
     const newFlights = flights.filter(item => {
-      const keys = Object.keys(config.airlines);
+      const keys = Object.keys(filterConfig.airlines);
       if (keys.length) {
-        return config.airlines[item.airline];
+        return filterConfig.airlines[item.airline];
       }
       return true;
     });
-    const sortedFlights = sortFlights(newFlights, config.sort);
+    const sortedFlights = sortFlights(newFlights, filterConfig.sort);
     setFlights(sortedFlights);
+  };
+
+  const renderEmpty = () => {
+    return (
+      <View
+        style={{
+          height: HEIGHT - 200,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{fontSize: FONT_SIZES['5xl'], fontWeight: 'bold'}}>
+          No Flights Found
+        </Text>
+      </View>
+    );
   };
 
   const renderContent = () => {
@@ -85,6 +137,7 @@ const Flights = ({navigation}: Props) => {
         style={{width: '100%', paddingHorizontal: 20}}
         renderItem={({item}) => <FlightItem {...item} />}
         keyExtractor={item => item.id.toString()}
+        ListEmptyComponent={renderEmpty}
       />
     );
   };
@@ -109,6 +162,11 @@ const Flights = ({navigation}: Props) => {
           <Image source={ASSETS.Filter} style={{width: 25, height: 25}} />
         </TouchableOpacity>
       </View>
+      <FlightRequest
+        fromFlights
+        config={flightConfig}
+        onChange={setFlightConfig}
+      />
       {renderContent()}
       <CustomModal
         dismissable={false}
@@ -143,7 +201,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 14,
+    paddingTop: 20,
+    borderWidth: 1,
+    borderColor: COLORS.BORDER_COLOR,
   },
   backContainer: {
     padding: 10,
